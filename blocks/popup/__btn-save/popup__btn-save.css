@@ -1,0 +1,22 @@
+.popup__btn-save {
+  color: #fff;
+  cursor: pointer;
+  background-color: #000;
+  padding-top: 14px;
+  padding-bottom: 18px;
+  border: none;
+  border-radius: 2px;
+  opacity: 1;
+  transition-property: opacity;
+  transition-property: 300ms;
+}
+.popup__btn-save:hover {
+  opacity: .8;
+}
+
+@media screen and ( max-width: 600px ) {
+  .popup__btn-save {
+    padding-top: 13px;
+    padding-bottom: 17px;
+  }
+}

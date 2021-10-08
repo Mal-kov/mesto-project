@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto-Russia</title>
+</head>
+<body>
+  <div class="page">
+
+    <div class="popup">
+      <div class="popup__container popup__container_margin">
+        <div class="popup__window">
+          <p class="popup__title">Редактировать профиль</p>
+          <form class="popup__form" >
+            <input class="popup__input-text" type="text" name="popup-profile-name" id="popup-profile-name" value="Жак-Ив Кусто">
+            <input class="popup__input-text" type="text" name="popup-profile-skills" id="popup-profile-skills" value="Исследователь океана">
+            <input class="popup__btn-save popup__btn-save_space" type="submit" value="Сохранить">
+          </form>
+        </div>
+        <button class="popup__btn-close popup__btn-close_space"></button>
+      </div>
+    </div>
+
+    <header class="header page__block-center">
+      <img class="header__logo" src="./images/logo.svg" alt="Mesto-Russia" >
+    </header>
+
+    <main class="content">
+
+      <!--=== profile - начало ===-->
+      <section class="profile page__block-center" aria-label="Описание профиля">
+
+        <div class="profile__block">
+          <img class="profile__image" src="./images/profile__image.jpg" alt="Жак-Ив Кусто">
+
+          <div class="profile__info">
+            <div class="profile__name-block">
+              <p class="profile__name">Жак-Ив Кусто</p>
+              <button class="profile__btn-edit profile__btn-edit_space"></button>
+            </div>
+
+            <p class="profile__skills">Исследователь океана</p>
+          </div>
+
+          <!-- <button class="profile__btn-edit profile__btn-edit_space"><img src="./images/btn-edit.png" alt=""></button> -->
+        </div>
+
+        <button class="profile__btn-add profile__btn-add_space"><img src="./images/btn-add.png" alt=""></button>
+
+      </section><!--=== profile - конец ===-->
+
+      <!--=== elements - начало ===-->
+      <section class="elements page__block-center" aria-label="Карточки достопримечательностей">
+        <ul class="elements__list ">
+
+          <li class="elements__item">
+            <img class="elements__img" src="./images/elements__img_karach.jpg" alt="Карачаево-Черкесская Республика">
+            <div class="elements__text-block">
+              <p class="elements__title">Карачаево-Черкесская Республика</p>
+              <button class="elements__btn-heart"></button>
+            </div>
+          </li>
+
+          <li class="elements__item">
+            <img class="elements__img" src="./images/elements__img_dombay.jpg" alt="Домбай">
+            <div class="elements__text-block">
+              <p class="elements__title">Домбай</p>
+              <button class="elements__btn-heart elements__btn-heart_active"></button>
+            </div>
+          </li>
+
+          <li class="elements__item">
+            <img class="elements__img" src="./images/elements__img_altay.jpg" alt="Алтай">
+            <div class="elements__text-block">
+              <p class="elements__title">Алтай</p>
+              <button class="elements__btn-heart"></button>
+            </div>
+          </li>
+
+          <li class="elements__item">
+            <img class="elements__img" src="./images/elements__img_ural.jpg" alt="Уральские горы">
+            <div class="elements__text-block">
+              <p class="elements__title">Уральские горы</p>
+              <button class="elements__btn-heart"></button>
+            </div>
+          </li>
+
+          <li class="elements__item">
+            <img class="elements__img" src="./images/elements__img_kareliya.jpg" alt="Карелия">
+            <div class="elements__text-block">
+              <p class="elements__title">Карелия</p>
+              <button class="elements__btn-heart"></button>
+            </div>
+          </li>
+
+          <li class="elements__item">
+            <img class="elements__img" src="./images/elements__img_elbrus.jpg" alt="Эльбрус">
+            <div class="elements__text-block">
+              <p class="elements__title">Эльбрус</p>
+              <button class="elements__btn-heart"></button>
+            </div>
+          </li>
+
+        </ul>
+      </section><!--=== elements - конец ===-->
+
+    </main>
+
+    <footer class="footer page__block-center">
+      <p class="footer__copyright">&copy;2021 Mesto Russia</p>
+    </footer>
+  </div><!--=== page - конец ===-->
+  <script src="./blocks/popup/popup.js"></script>
+  <script src="./blocks/elements/__btn-heart/elements__btn-heart.js"></script>
+  <!-- <script async src="//pixel-perfect.org/service/script.js?guid=a59dd8400a96022d6e27d44f04b897ad"></script> -->
+</body>
+</html>

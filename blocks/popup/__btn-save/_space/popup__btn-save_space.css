@@ -1,0 +1,9 @@
+.popup__btn-save_space {
+  margin-top: 48px;
+}
+
+@media screen and ( max-width: 600px ) {
+  .popup__btn-save_space {
+    margin-top: 44px;
+  }
+}
