@@ -1,9 +1,9 @@
-.profile__btn-edit_space {
+.profile__btn-edit_margin_top {
   margin-top: 15px;
 }
 
 @media screen and ( max-width: 600px ) {
-  .profile__btn-edit_space {
+  .profile__btn-edit_margin_top {
     margin-top: 10px;
   }
 }

@@ -3,6 +3,7 @@
   display: block;
   padding-top: 16px;
 }
+
 @media screen and ( max-width: 950px ) {
   .elements {
     max-width: 580px;

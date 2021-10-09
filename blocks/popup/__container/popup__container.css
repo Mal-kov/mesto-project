@@ -1,21 +1,14 @@
 .popup__container {
   display: flex;
   flex-direction: column-reverse;
-  /* justify-content: center; */
-  max-width: 430px;
-  max-height: 370px;
-  /* position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%); */
+  max-width: 510px;
+  min-height: 370px;
+  position: relative;
 }
+
 @media screen and ( max-width: 600px ) {
   .popup__container {
-    /* display: flex;
-    justify-content: space-between; */
     flex-direction: column-reverse;
-
     max-width: 282px;
-
   }
 }

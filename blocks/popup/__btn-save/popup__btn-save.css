@@ -10,6 +10,7 @@
   transition-property: opacity;
   transition-property: 300ms;
 }
+
 .popup__btn-save:hover {
   opacity: .8;
 }

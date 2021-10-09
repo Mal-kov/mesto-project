@@ -1,8 +1,9 @@
-.popup__container_margin {
+.popup__container_block_center {
   margin: 155px auto 0;
 }
+
 @media screen and ( max-width: 600px ) {
-  .popup__container_margin {
+  .popup__container_block_center {
     margin-top: 88px;
   }
 }
