@@ -2,6 +2,7 @@
   display: block;
   width: 24px;
   height: 24px;
+  margin-top: 15px;
   background-color: transparent;
   background-image: url('../../../images/btn-edit.svg');
   background-position: center;
@@ -20,8 +21,8 @@
 
 @media screen and ( max-width: 600px ) {
   .profile__btn-edit {
+    margin-top: 10px;
     width: 18px;
     height: 18px;
   }
 }
-

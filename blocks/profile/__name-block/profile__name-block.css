@@ -4,9 +4,14 @@
   min-width: 336px;
 }
 
-@media screen and ( max-width: 600px ) {
+@media screen and ( max-width: 950px ) {
   .profile__name-block {
     justify-content: center;
+  }
+}
+
+@media screen and ( max-width: 600px ) {
+  .profile__name-block {
     padding-left: 10x;
     min-width: 282px;
   }

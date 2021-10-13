@@ -10,6 +10,12 @@
   overflow: hidden;
 }
 
+@media screen and ( max-width: 950px ) {
+  .profile__skills {
+    align-self: center;
+  }
+}
+
 @media screen and ( max-width: 600px ) {
   .profile__skills {
     font-size: 14px;

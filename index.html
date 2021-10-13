@@ -19,17 +19,15 @@
 
       <!--=== profile - начало ===-->
       <section class="profile page__block-center" aria-label="Описание профиля">
-        <div class="profile__block">
-          <img class="profile__image" src="./images/profile__image.jpg" alt="Жак-Ив Кусто">
-          <div class="profile__info">
-            <div class="profile__name-block">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button type="button" class="profile__btn-edit profile__btn-edit_margin_top"></button>
-            </div>
-            <p class="profile__skills">Исследователь океана</p>
+        <img class="profile__image" src="./images/profile__image.jpg" alt="Жак-Ив Кусто">
+        <div class="profile__info">
+          <div class="profile__name-block">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__btn-edit"></button>
           </div>
+          <p class="profile__skills">Исследователь океана</p>
         </div>
-        <button type="button" class="profile__btn-add profile__btn-add_margin_top"></button>
+        <button type="button" class="profile__btn-add"></button>
       </section><!--=== profile - конец ===-->
 
       <!--=== elements - начало ===-->
@@ -87,23 +85,19 @@
 
     <!--=== модальное окно редактирования данных - начало ===-->
     <!--=== popup_opened ===-->
-    <div class="popup popup_opened">
-      <div class="popup__container popup__container_block_center">
-
-        <!-- Прошу разрешить использование блока обертку popup__window для более удобного размещения формы
-        с абсолютным позиционированием в popup__container   -->
-        <div class="popup__window">
-          <h2 class="popup__title">Редактировать профиль</h2>
+    <div class="popup">
+      <div class="popup__container">
           <form name="form-profile" class="popup__form" >
+            <h2 class="popup__title">Редактировать профиль</h2>
             <input class="popup__input-text" type="text" name="popup-profile-name" id="popup-profile-name" value="Жак-Ив Кусто" placeholder="Имя Вашего профиля">
             <input class="popup__input-text" type="text" name="popup-profile-skills" id="popup-profile-skills" value="Исследователь океана" placeholder="Ваша профессия">
             <button class="popup__btn-save popup__btn-save_margin_top" type="submit">Сохранить</button>
           </form>
-        </div>
         <button type="button" class="popup__btn-close"></button>
       </div>
     </div><!--=== модальное окно редактирования данных - конец ===-->
 
   </div><!--=== page - конец ===-->
+  <!-- <script async src="//pixel-perfect.org/service/script.js?guid=a59dd8400a96022d6e27d44f04b897ad"></script> -->
 </body>
 </html>
