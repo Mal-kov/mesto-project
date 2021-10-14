@@ -5,15 +5,14 @@
   background-image: url('../../../images/btn-popup-close.svg');
   background-position: center;
   background-repeat: no-repeat;
+  margin-bottom: 8px;
+  margin-left: 477px;
   width: 32px;
   height: 32px;
-  align-self: end;
+  align-self: center;
   opacity: 1;
-  transition-duration: 300ms; /* https://developer.mozilla.org/ru/docs/Web/CSS/transition-duration */
+  transition-duration: 300ms;
   transition-property: opacity;
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 
 .popup__btn-close:hover {
@@ -25,6 +24,7 @@
     background-size: 20px;
     width: 20px;
     height: 20px;
-    top: 10px;
+    margin-left: 262px;
+    margin-bottom: 16px;
   }
 }

@@ -1,10 +1,17 @@
 .popup {
   display: none;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
+  padding-top: 155px;
+  background-color: rgba( 0,0,0, .5 );
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba( 0,0,0, .5 );
 }
 
+@media screen and ( max-width: 600px ) {
+  .popup {
+    padding-top: 88px;
+  }
+}
