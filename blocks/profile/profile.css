@@ -16,8 +16,6 @@
 @media screen and ( max-width: 600px ) {
   .profile {
     padding-top: 42px;
-    padding-left: 19px;
-    padding-right: 19px;
     text-align: center;
   }
 }

@@ -11,8 +11,8 @@
   box-sizing: border-box;
   cursor: pointer;
   opacity: 1;
-  transition-property: opaciry;
-  transition-duration: 300ms;
+  transition-duration: 300ms; /* https://developer.mozilla.org/ru/docs/Web/CSS/transition-duration */
+  transition-property: opacity;
 }
 
 .profile__btn-edit:hover {

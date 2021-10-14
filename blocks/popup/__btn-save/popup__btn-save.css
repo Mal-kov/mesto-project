@@ -7,11 +7,12 @@
   background-color: #000;
   padding-top: 13px;
   padding-bottom: 15px;
+  margin-top: 48px;
   border: none;
   border-radius: 2px;
   opacity: 1;
+  transition-duration: 300ms; /* https://developer.mozilla.org/ru/docs/Web/CSS/transition-duration */
   transition-property: opacity;
-  transition-duration: 300ms;
 }
 
 .popup__btn-save:hover {
@@ -22,6 +23,7 @@
   .popup__btn-save {
     padding-top: 13px;
     padding-bottom: 17px;
+    margin-top: 44px;
     font-size: 14px;
     line-height: 17px;
   }

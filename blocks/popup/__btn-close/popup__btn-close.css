@@ -9,8 +9,8 @@
   height: 32px;
   align-self: end;
   opacity: 1;
+  transition-duration: 300ms; /* https://developer.mozilla.org/ru/docs/Web/CSS/transition-duration */
   transition-property: opacity;
-  transition-duration: 300ms;
   position: absolute;
   top: 0;
   right: 0;
