@@ -11,7 +11,7 @@
   border: none;
   border-radius: 2px;
   opacity: 1;
-  transition-duration: 300ms; /* https://developer.mozilla.org/ru/docs/Web/CSS/transition-duration */
+  transition-duration: 300ms;
   transition-property: opacity;
 }
 
@@ -21,7 +21,6 @@
 
 @media screen and ( max-width: 600px ) {
   .popup__btn-save {
-    padding-top: 13px;
     padding-bottom: 17px;
     margin-top: 44px;
     font-size: 14px;
