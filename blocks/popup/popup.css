@@ -2,10 +2,9 @@
   display: none;
   visibility: hidden;
   opacity: 0;
+  transition: visibility 0s, opacity 0.8s;
   /* transition: opacity 1s ease-out; */
-  transition: visibility 0.6s, opacity 0.6s;
-
-
+  /* transition: visibility 0.6s, opacity 0.6s; */
 
 
   flex-direction: column;
@@ -16,7 +15,5 @@
   position: fixed;
   top: 0;
   left: 0;
-
-
 
 }
