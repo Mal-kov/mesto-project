@@ -34,6 +34,7 @@
       <section class="elements page__block-center" aria-label="Карточки достопримечательностей">
         <ul class="elements__list ">
           <li class="elements__item">
+            <button type="button" class="elements__btn-trash"></button>
             <img class="elements__img" src="./images/elements__img_karach.jpg" alt="Карачаево-Черкесская Республика">
             <div class="elements__text-block">
               <p class="elements__title">Карачаево-Черкесская Республика</p>
@@ -41,6 +42,7 @@
             </div>
           </li>
           <li class="elements__item">
+            <button type="button" class="elements__btn-trash"></button>
             <img class="elements__img" src="./images/elements__img_dombay.jpg" alt="Домбай">
             <div class="elements__text-block">
               <p class="elements__title">Домбай</p>
@@ -48,6 +50,7 @@
             </div>
           </li>
           <li class="elements__item">
+            <button type="button" class="elements__btn-trash"></button>
             <img class="elements__img" src="./images/elements__img_altay.jpg" alt="Алтай">
             <div class="elements__text-block">
               <p class="elements__title">Алтай</p>
@@ -55,6 +58,7 @@
             </div>
           </li>
           <li class="elements__item">
+            <button type="button" class="elements__btn-trash"></button>
             <img class="elements__img" src="./images/elements__img_ural.jpg" alt="Уральские горы">
             <div class="elements__text-block">
               <p class="elements__title">Уральские горы</p>
@@ -62,6 +66,7 @@
             </div>
           </li>
           <li class="elements__item">
+            <button type="button" class="elements__btn-trash"></button>
             <img class="elements__img" src="./images/elements__img_kareliya.jpg" alt="Карелия">
             <div class="elements__text-block">
               <p class="elements__title">Карелия</p>
@@ -69,6 +74,7 @@
             </div>
           </li>
           <li class="elements__item">
+            <button type="button" class="elements__btn-trash"></button>
             <img class="elements__img" src="./images/elements__img_elbrus.jpg" alt="Эльбрус">
             <div class="elements__text-block">
               <p class="elements__title">Эльбрус</p>
@@ -90,15 +96,50 @@
         <button type="button" class="popup__btn-close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="form-profile" class="popup__form" >
-          <input class="popup__input-text" type="text" name="popup-profile-name" id="popup-profile-name" value="Жак-Ив Кусто" placeholder="Имя Вашего профиля">
-          <input class="popup__input-text" type="text" name="popup-profile-skills" id="popup-profile-skills" value="Исследователь океана" placeholder="Ваша профессия">
+          <input class="popup__input-text" type="text" name="popup-profile-name" id="popupProfileName" value="Жак-Ив Кусто" placeholder="Имя Вашего профиля">
+          <input class="popup__input-text" type="text" name="popup-profile-skills" id="popupProfileSkills" value="Исследователь океана" placeholder="Ваша профессия">
           <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>
     </div><!--=== модальное окно редактирования данных - конец ===-->
 
+    <!--=== модальное окно добавления мест - начало ===-->
+    <!--=== popup_opened ===-->
+    <div class="popup-place">
+      <div class="popup__container">
+        <button type="button" class="popup__btn-close"></button>
+        <h2 class="popup__title">Новое место:</h2>
+        <form name="form-place" class="popup__form" >
+          <input class="popup__input-text" type="text" name="popup-place-name" id="popupPlaceName" value="" placeholder="Название">
+          <input class="popup__input-text" type="text" name="popup-place-link" id="popupPlaceLink" value="" placeholder="Ссылка на картинку">
+          <button class="popup__btn-save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div><!--=== модальное окно редактирования данных - конец ===-->
+
+    <!--=== модальное окно просмотра изображения - начало ===-->
+    <!--=== popup_opened ===-->
+    <div class="popup-image">
+      <div class="popup__container">
+        <button type="button" class="popup__btn-close"></button>
+        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="">
+        <h2 class="popup__title">Новое место</h2>
+
+      </div>
+    </div><!--=== модальное окно редактирования данных - конец ===-->
+
   </div><!--=== page - конец ===-->
   <!-- <script async src="//pixel-perfect.org/service/script.js?guid=a59dd8400a96022d6e27d44f04b897ad"></script> -->
-  <!-- <script src="./index.js"></script> -->
+  <template id="place-template">
+    <li class="elements__item">
+      <button type="button" class="elements__btn-trash"></button>
+      <img class="elements__img" src="" alt="">
+      <div class="elements__text-block">
+        <p class="elements__title"></p>
+        <button type="button" class="elements__btn-heart"></button>
+      </div>
+    </li>
+  </template>
+  <script src="pages/index.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
   padding: 0 20px 0 0;
   cursor: pointer;
   opacity: 1;
-  transition-duration: 300ms; /* https://developer.mozilla.org/ru/docs/Web/CSS/transition-duration */
+  transition-duration: 300ms;
   transition-property: opacity;
 }
 
