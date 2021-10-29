@@ -121,11 +121,11 @@ function popupImageRender(placeName, plaseLink) {
 
   openPopup(popupImage);
 
-  const fieldBigImage = popupImage.querySelector('.popup-image__big-image');
+  const fieldBigImage = popupImage.querySelector('.popup__image-big');
   fieldBigImage.setAttribute('src', plaseLink);
   fieldBigImage.setAttribute('alt', placeName);
 
-  const fieldImgTitle = popupImage.querySelector('.popup-image__title');
+  const fieldImgTitle = popupImage.querySelector('.popup__image-title');
   fieldImgTitle.textContent = placeName;
 }
 

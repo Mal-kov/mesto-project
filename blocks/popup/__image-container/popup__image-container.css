@@ -1,5 +1,4 @@
-.popup-image__container {
-
+.popup__image-container {
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -14,6 +13,5 @@
 @media screen and ( max-width: 600px ) {
   .popup-image__container {
     max-width: 90%;
-
   }
 }
