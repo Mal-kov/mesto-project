@@ -26,3 +26,4 @@
  ветка -
  main -> develop
  develop -> feature/popup
+ main -> hotfix/popup
