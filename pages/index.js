@@ -44,13 +44,13 @@ popupImageBtnClose.addEventListener('click' , () => {
 // ***************************************************************************************
 // Обрботка формы пользователя
 
-const formElement = popupUser.querySelector('.popup__form_type_profile');
+const popupProfileForm = popupUser.querySelector('.popup__form_type_profile');
 
 function handleFormProfileSubmit(evt) {
   evt.preventDefault();
 
-  const nameInput = formElement.querySelector('#popup-profile-name');
-  const jobInput = formElement.querySelector('#popup-profile-skills');
+  const nameInput = popupProfileForm.querySelector('#popup-profile-name');
+  const jobInput = popupProfileForm.querySelector('#popup-profile-skills');
 
   const nameField = document.querySelector('.profile__name');
   const jobField = document.querySelector('.profile__skills');
@@ -61,7 +61,7 @@ function handleFormProfileSubmit(evt) {
   closePopup(popupUser);
 }
 
-formElement.addEventListener('submit', handleFormProfileSubmit);
+popupProfileForm.addEventListener('submit', handleFormProfileSubmit);
 
 // ***************************************************************************************
 // 3. Форма добавления карточки / 4. Добавление карточки / 5. Лайк карточки  /  6. Удаление карточки
