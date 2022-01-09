@@ -1,7 +1,7 @@
 // ***************************************************************************************
 // 2. Заполнение карточек от JS
 
-const initialCards = [
+export const initialCards = [
   {
     name: 'Марс',
     link: 'https:///malkov-os.ru/yand_pr/pictures/photo-Mars1634876371692-681495dbe82d.jpg'
@@ -40,6 +40,6 @@ const initialCards = [
   }
 ];
 
-initialCards.forEach( item => {
-  addCard(item.name, item.link);
-})
+// initialCards.forEach( item => {
+//   addCard(item.name, item.link);
+// })

@@ -1,3 +1,11 @@
+import {initialCards} from './initial-сards';
+// import './initial-сards';
+
+
+initialCards.forEach( item => {
+  addCard(item.name, item.link);
+})
+
 // ***************************************************************************************
 // 1. Открытие и закрытие модального окна
 
