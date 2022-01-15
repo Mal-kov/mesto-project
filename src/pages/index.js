@@ -1,5 +1,28 @@
-import {initialCards} from './initial-сards';
+// инициализацию JS-кода, добавление слушателей и другие важные участки
+
+import {initialCards} from '../components/card';
 // import './initial-сards';
+
+
+
+
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+
+// enableValidation({
+//   formSelector: '.popup__form',
+//   inputSelector: '.popup__input',
+//   submitButtonSelector: '.popup__button',
+//   inactiveButtonClass: 'popup__button_disabled',
+//   inputErrorClass: 'popup__input_type_error',
+//   errorClass: 'popup__error_visible'
+// });
+
+
+
+
+
+
 
 
 initialCards.forEach( item => {
