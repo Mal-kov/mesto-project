@@ -8,6 +8,10 @@
   padding-bottom: 9px;
   min-width: 358px;
 }
+.popup__input-text:invalid {
+  border-bottom-color: red;
+}
+
 
 @media screen and ( max-width: 600px ) {
   .popup__input-text {

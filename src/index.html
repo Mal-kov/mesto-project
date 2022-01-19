@@ -48,9 +48,26 @@
       <div class="popup__container">
         <button type="button" class="popup__btn-close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="form-profile" class="popup__form popup__form_type_profile" >
-          <input class="popup__input-text" type="text" name="popup-profile-name" id="popup-profile-name" value="Жак-Ив Кусто" placeholder="Имя Вашего профиля" required>
-          <input class="popup__input-text" type="text" name="popup-profile-skills" id="popup-profile-skills" value="Исследователь океана" placeholder="Ваша профессия" required>
+        <form name="form-profile" class="popup__form popup__form_type_profile" novalidate>
+          <input class="popup__input-text"
+            type="text" name="popup-profile-name"
+            id="popup-profile-name"
+            value="Жак-Ив Кусто"
+            placeholder="Имя Вашего профиля"
+            minlength="2"
+            maxlength="40"
+            required><span class="popup__input-text-error" id="popup-profile-name-error"></span>
+
+          <input class="popup__input-text"
+            type="text"
+            name="popup-profile-skills"
+            id="popup-profile-skills"
+            value="Исследователь океана"
+            placeholder="Ваша профессия"
+            minlength="2"
+            maxlength="200"
+            required>
+            <span class="popup__input-text-error" id="popup-profile-skills-error">123</span>
           <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>
@@ -62,9 +79,11 @@
       <div class="popup__container">
         <button type="button" class="popup__btn-close"></button>
         <h2 class="popup__title">Новое место:</h2>
-        <form name="form-place" class="popup__form popup__form_type_place" >
+        <form name="form-place" class="popup__form popup__form_type_place" novalidate>
           <input class="popup__input-text" type="text" name="popup-place-name" id="popup-place-name" value="" placeholder="Название" required>
+          <span class="popup__input-text-error" id="popup-place-name-error"></span>
           <input class="popup__input-text" type="text" name="popup-place-link" id="popup-place-link" value="" placeholder="Ссылка на картинку" required>
+          <span class="popup__input-text-error" id="popup-place-link-error"></span>
           <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>

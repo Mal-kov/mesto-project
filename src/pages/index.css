@@ -16,6 +16,8 @@
 @import url('../blocks/popup/__image-big/popup__image-big.css');
 @import url('../blocks/popup/__image-container/popup__image-container.css');
 @import url('../blocks/popup/__image-title/popup__image-title.css');
+@import url('../blocks/popup/__input-text-error/popup__input-text-error.css');
+@import url('../blocks/popup/__input-text-error/popup__input-text-error_active.css');
 
 /* header */
 @import url('../blocks/header/header.css');

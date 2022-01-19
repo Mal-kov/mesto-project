@@ -3,7 +3,9 @@
 import {initialCards} from '../components/card';
 // import './initial-сards';
 
+//import {nameInput} from '../components/validate';
 
+import {enableValidation} from '../components/validate';
 
 
 // включение валидации вызовом enableValidation
@@ -24,10 +26,6 @@ import {initialCards} from '../components/card';
 
 
 
-
-initialCards.forEach( item => {
-  addCard(item.name, item.link);
-})
 
 // ***************************************************************************************
 // 1. Открытие и закрытие модального окна
@@ -76,12 +74,20 @@ popupImageBtnClose.addEventListener('click' , () => {
 // Обрботка формы пользователя
 
 const popupProfileForm = popupUser.querySelector('.popup__form_type_profile');
+const nameInput = popupProfileForm.querySelector('#popup-profile-name');
+const formError = nameInput.querySelector(`.${nameInput.id}-error`);
+nameInput.addEventListener('input', (evt) => {
+  checkInputValidity();
+})
+
+const jobInput = popupProfileForm.querySelector('#popup-profile-skills');
 
 function handleFormProfileSubmit(evt) {
   evt.preventDefault();
 
-  const nameInput = popupProfileForm.querySelector('#popup-profile-name');
-  const jobInput = popupProfileForm.querySelector('#popup-profile-skills');
+
+
+  //const jobInput = popupProfileForm.querySelector('#popup-profile-skills');
 
   const nameField = document.querySelector('.profile__name');
   const jobField = document.querySelector('.profile__skills');
@@ -91,6 +97,29 @@ function handleFormProfileSubmit(evt) {
 
   closePopup(popupUser);
 }
+
+const checkInputValidity = () => {
+  if (!nameInput.validity.valid) {
+    showError(nameInput, nameInput.validationMessage);
+  } else {
+    hideError(nameInput);
+  }
+};
+
+const showError = (input, errorMessage) => {
+  input.classList.add('form__input_type_error');
+  formError.textContent = errorMessage;
+  formError.classList.add('form__input-error_active');
+};
+
+const hideError = (input) => {
+  input.classList.remove('form__input_type_error');
+  // 1. Удалите активный класс ошибки c formError.
+  formError.classList.remove('form__input-error_active');
+  // 2. Очистите свойство textContent элемента formError.
+  formError.textContent = '';
+};
+
 
 popupProfileForm.addEventListener('submit', handleFormProfileSubmit);
 
@@ -164,3 +193,11 @@ popupPlaceForm.addEventListener('submit', handleCardFormSubmit );
 
 // ***************************************************************************************
 //
+
+// Вызов списка мест
+initialCards.forEach( item => {
+  addCard(item.name, item.link);
+})
+
+// Вызов валидации
+enableValidation();
