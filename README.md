@@ -11,11 +11,12 @@
 
 
 **Интро**
-Верстка проекта адаптирована для мобильных устройств.
-Все изображения оптимизированы через приложение сайта (https://tinypng.com/).
+
+<!-- Верстка проекта адаптирована для мобильных устройств.
+Все изображения оптимизированы через приложение сайта (https://tinypng.com/). -->
 
 **Размещение**
-Размещение на GitHub Pages ( https://mal-kov.github.io/mesto-project/ )
+<!-- Размещение на GitHub Pages ( https://mal-kov.github.io/mesto-project/ ) -->
 Размещение на GitHub ( https://github.com/Mal-kov/mesto-project.git )
 
 
