@@ -13,6 +13,7 @@
 
     <header class="header page__block-center">
       <img class="header__logo" src="./images/logo.svg" alt="Место-Россия" >
+      <!-- <img class="header__logo" src="" alt="Место-Россия" > -->
     </header>
 
     <main class="content">
@@ -49,16 +50,20 @@
         <button type="button" class="popup__btn-close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="form-profile" class="popup__form popup__form_type_profile" novalidate>
-          <input class="popup__input-text"
-            type="text" name="popup-profile-name"
+          <section class="popup__form-section">
+            <input class="popup__input-text"
+            type="text"
+            name="popup-profile-name"
             id="popup-profile-name"
             value="Жак-Ив Кусто"
             placeholder="Имя Вашего профиля"
             minlength="2"
             maxlength="40"
-            required><span class="popup__input-text-error" id="popup-profile-name-error"></span>
-
-          <input class="popup__input-text"
+            required>
+            <span class="popup__input-text-error"></span>
+          </section>
+          <section class="popup__form-section">
+            <input class="popup__input-text"
             type="text"
             name="popup-profile-skills"
             id="popup-profile-skills"
@@ -67,7 +72,9 @@
             minlength="2"
             maxlength="200"
             required>
-            <span class="popup__input-text-error" id="popup-profile-skills-error">123</span>
+            <span class="popup__input-text-error"></span>
+          </section>
+
           <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>
@@ -80,10 +87,14 @@
         <button type="button" class="popup__btn-close"></button>
         <h2 class="popup__title">Новое место:</h2>
         <form name="form-place" class="popup__form popup__form_type_place" novalidate>
-          <input class="popup__input-text" type="text" name="popup-place-name" id="popup-place-name" value="" placeholder="Название" required>
-          <span class="popup__input-text-error" id="popup-place-name-error"></span>
-          <input class="popup__input-text" type="text" name="popup-place-link" id="popup-place-link" value="" placeholder="Ссылка на картинку" required>
-          <span class="popup__input-text-error" id="popup-place-link-error"></span>
+          <section class="popup__form-section">
+            <input class="popup__input-text" type="text" name="popup-place-name" id="popup-place-name" value="" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="popup__input-text-error" id="popup-place-name-error"></span>
+          </section>
+          <section class="popup__form-section">
+            <input class="popup__input-text" type="url" name="popup-place-link" id="popup-place-link" value="" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-text-error" id="popup-place-link-error"></span>
+          </section>
           <button class="popup__btn-save" type="submit">Сохранить</button>
         </form>
       </div>

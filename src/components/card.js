@@ -1,49 +1,70 @@
-
-// функции для работы с карточками проекта
-
-
 // ***************************************************************************************
-// 2. Заполнение карточек от JS
+// Создание / удаление карточек
 
-export const initialCards = [
-  {
-    name: 'Марс',
-    link: 'https:///malkov-os.ru/yand_pr/pictures/photo-Mars1634876371692-681495dbe82d.jpg'
-  },
-  {
-    name: 'Домбай',
-    link: 'https:///malkov-os.ru/yand_pr/pictures/photo-Dombuy1599821020079-515af554d944.jpg'
-  },
-  {
-    name: 'Карелия',
-    link: 'https:///malkov-os.ru/yand_pr/pictures/photo-Kerel1548288242-d454d4648b55.jpg'
-  },
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
-// initialCards.forEach( item => {
-//   addCard(item.name, item.link);
-// })
+import {openPopup, closePopup} from '../components/modal';
+import {popupPlace} from '../pages/index'
+
+const cardContainer = document.querySelector('.elements__list');
+
+export const handleCardFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  const placeName = document.querySelector('#popup-place-name');
+  const plaseLink = document.querySelector('#popup-place-link');
+
+  addCard(placeName.value, plaseLink.value);
+
+  placeName.value = '';
+  plaseLink.value = '';
+
+  closePopup(popupPlace);
+}
+
+export const addCard = (placeName, plaseLink) => {
+  const newCard = createCard(placeName, plaseLink);
+  cardContainer.prepend(newCard);
+}
+
+const createCard = (placeName, plaseLink) => {
+  const placeTemplate = document.querySelector('#place-template').content;
+  const placeElement = placeTemplate.querySelector('.elements__item').cloneNode( true );
+
+  placeElement.querySelector('.elements__btn-trash').addEventListener('click', (evt) => {
+    deleteCard(evt.target);
+  } );
+
+  placeElement.querySelector('.elements__title').textContent = placeName;
+
+  const placeImg = placeElement.querySelector('.elements__img');
+  placeImg.setAttribute('src', plaseLink);
+  placeImg.setAttribute('alt', placeName);
+
+  placeElement.querySelector('.elements__img').addEventListener('click', (evt) => {
+    popupImageRender(evt.target.alt, evt.target.currentSrc);
+  })
+
+  placeElement.querySelector('.elements__btn-heart').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('elements__btn-heart_active');
+  });
+
+  return placeElement;
+}
+
+const deleteCard = (path) => {
+  const deleteButton = path.closest( '.elements__item' );
+  deleteButton.remove();
+}
+
+const popupImageRender = (placeName, plaseLink) => {
+  openPopup(popupImage);
+
+  const fieldBigImage = popupImage.querySelector('.popup__image-big');
+  fieldBigImage.setAttribute('src', plaseLink);
+  fieldBigImage.setAttribute('alt', placeName);
+
+  const fieldImgTitle = popupImage.querySelector('.popup__image-title');
+  fieldImgTitle.textContent = placeName;
+}
+
+
