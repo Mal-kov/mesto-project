@@ -4,7 +4,7 @@
 const showInputError = (inputElement, errorMessage, data) => {
   // console.log('Показать ошибку');
   // const errorMessageElement = inputElement.querySelector(`#${inputElement.id}-error`);
-  const errorMessageElement = inputElement.closest('.popup__form-section').querySelector('.popup__input-text-error');
+  const errorMessageElement = inputElement.closest(data.popupFormSection).querySelector(data.popupInputTextError);
 
   errorMessageElement.textContent = errorMessage;
   errorMessageElement.classList.add(data.inputErrorClass);
@@ -13,7 +13,7 @@ const showInputError = (inputElement, errorMessage, data) => {
 
 const hideInputError = (inputElement, data) => {
   //console.log('Нет ошибок');
-  const errorMessageElement = inputElement.closest('.popup__form-section').querySelector('.popup__input-text-error');
+  const errorMessageElement = inputElement.closest(data.popupFormSection).querySelector(data.popupInputTextError);
 
   errorMessageElement.textContent = '';
   //console.log(errorMessageElement.classList);
@@ -85,12 +85,3 @@ export const enableValidation = (data) => {
   } )
 }
 
-
-// enableValidation({
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: 'popup__button_disabled',
-//   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__error_visible'
-// });

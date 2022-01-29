@@ -3,7 +3,7 @@
 
 
 import {openPopup, closePopup} from '../components/modal';
-import {popupPlace} from '../pages/index'
+import {popupPlace, popupImage} from '../pages/index'
 
 const cardContainer = document.querySelector('.elements__list');
 
