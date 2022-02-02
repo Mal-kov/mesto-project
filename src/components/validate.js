@@ -1,6 +1,8 @@
 // ***************************************************************************************
 //Функциональность валидации форм
 
+import {disabledSubmitBtn} from './utils';
+
 const showInputError = (inputElement, errorMessage, data) => {
   // console.log('Показать ошибку');
   // const errorMessageElement = inputElement.querySelector(`#${inputElement.id}-error`);
@@ -36,6 +38,8 @@ const checkInputValidity = (inputElement, data) => {
 const toggleButtonState = (inputListArr, submitButtonElement, data) => {
 
   const hasInvalidInput = inputListArr.some( (inputElement) => !inputElement.validity.valid);
+  const emptyInput = inputListArr.some( (inputElement) => inputElement.validity.valueMissing);
+  console.log(emptyInput);
 
   if (hasInvalidInput) {
     submitButtonElement.classList.add(data.inactiveButtonClass);
@@ -73,6 +77,8 @@ export const enableValidation = (data) => {
 
   //перевод списка в массив
   const formListArr = Array.from(formsList);
+
+  disabledSubmitBtn(data.inactiveButtonClass);
 
   // сброс отправки формы
   const handleFormSubmit = (evt) => {

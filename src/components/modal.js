@@ -1,20 +1,26 @@
-// ***************************************************************************************
+// ****************************************
 // Работа модальных окон
 
 import {escButton} from '../pages/index';
+import {disabledSubmitBtn} from './utils';
 
 export const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
-  escBtnListener(popupElement);
-  // document.addEventListener('keydown', escBtnListener(popupElement));
-  // console.log(popupElement);
-  // escBtnListenerAdd(popupElement);
 
+  document.addEventListener('keydown', escBtnListener);
+
+  const popupBlock = popupElement.classList.contains('popup_type_place');
+  if (popupBlock){
+    disabledSubmitBtn('popup__btn-save_inactive');
+  }
+  // document.addEventListener('click', overlayClick);
 }
 
 export const closePopup = (popupElement) => {
   popupElement.classList.remove('popup_opened');
-  // document.removeEventListener('keydown', escBtnListener);
+
+  document.removeEventListener('keydown', escBtnListener);
+  // document.removeEventListener('click', overlayClick);
 }
 
 export const overlayClick = (popupElement) => {
@@ -27,42 +33,9 @@ export const overlayClick = (popupElement) => {
   })
 }
 
-
-
-const escBtnListener = (popupElement) => {
-  document.addEventListener('keydown', (evt) => {
-    if ( evt.keyCode == escButton ) {
-      // console.log(evt.target);
-      // console.log(popupElement);
-      closePopup(popupElement);
-      document.removeEventListener('keydown', escBtnListener);
-    }
-  });
+const escBtnListener = (evt) => {
+  if ( evt.keyCode == escButton ) {
+    const opendPopup = document.querySelector('.popup_opened');
+    closePopup(opendPopup);
+  }
 }
-
-
-
-// (evt) => {
-//     if ( evt.keyCode == 27 ) {
-//       console.log(evt)
-//       closePopup(evt.target);
-//       document.removeEventListener('keydown', escBtnListener);
-//     }
-//   }
-
-// export const escBtnListener = (evt) => {
-//   if ( evt.keyCode == 27 ) {
-//     console.log(evt)
-//     closePopup(evt.target);
-//     document.removeEventListener('keydown', escBtnListener);
-//   }
-// }
-
-// const escBtnListenerAdd = (popup) => {
-//   document.addEventListener('keydown', escBtnListener);
-// }
-
-// const escBtnListenerRemove = (popup) => {
-//   document.removeEventListener()
-
-// }

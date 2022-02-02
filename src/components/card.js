@@ -2,16 +2,24 @@
 // Создание / удаление карточек
 
 
-import {openPopup, closePopup} from '../components/modal';
-import {popupPlace, popupImage} from '../pages/index'
+import {openPopup, closePopup} from './modal';
+import {popupPlace, popupImage, fieldBigImage, fieldImgTitle} from '../pages/index'
+import {disabledSubmitBtn} from './utils';
 
 const cardContainer = document.querySelector('.elements__list');
+const placeName = document.querySelector('#popup-place-name');
+const plaseLink = document.querySelector('#popup-place-link');
+
+const popupImageRender = (placeName, plaseLink) => {
+  openPopup(popupImage);
+
+  fieldBigImage.setAttribute('src', plaseLink);
+  fieldBigImage.setAttribute('alt', placeName);
+  fieldImgTitle.textContent = placeName;
+}
 
 export const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-
-  const placeName = document.querySelector('#popup-place-name');
-  const plaseLink = document.querySelector('#popup-place-link');
 
   addCard(placeName.value, plaseLink.value);
 
@@ -19,6 +27,7 @@ export const handleCardFormSubmit = (evt) => {
   plaseLink.value = '';
 
   closePopup(popupPlace);
+  disabledSubmitBtn();
 }
 
 export const addCard = (placeName, plaseLink) => {
@@ -56,15 +65,5 @@ const deleteCard = (path) => {
   deleteButton.remove();
 }
 
-const popupImageRender = (placeName, plaseLink) => {
-  openPopup(popupImage);
-
-  const fieldBigImage = popupImage.querySelector('.popup__image-big');
-  fieldBigImage.setAttribute('src', plaseLink);
-  fieldBigImage.setAttribute('alt', placeName);
-
-  const fieldImgTitle = popupImage.querySelector('.popup__image-title');
-  fieldImgTitle.textContent = placeName;
-}
 
 
