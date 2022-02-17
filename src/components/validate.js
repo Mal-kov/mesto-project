@@ -2,6 +2,7 @@
 //Функциональность валидации форм
 
 import {disabledSubmitBtn} from './utils';
+import {popupPlace} from '../pages/index';
 
 const showInputError = (inputElement, errorMessage, data) => {
   // console.log('Показать ошибку');

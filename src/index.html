@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="./images/favicon.png">
+  <!-- <link rel="icon" href="./images/favicon.png"> -->
   <!-- <link rel="stylesheet" href="pages/index.css"> -->
   <title>Mesto-Russia</title>
 </head>
@@ -19,7 +19,11 @@
     <main class="content">
       <!--=== profile - начало ===-->
       <section class="profile page__block-center" aria-label="Описание профиля">
-        <img class="profile__image" src="" alt="Жак-Ив Кусто">
+        <div class="profile__image-block">
+          <img class="profile__image" src="" alt="Жак-Ив Кусто">
+          <button type="button" class="profile__image-edit"></button>
+        </div>
+
         <div class="profile__info">
           <div class="profile__name-block">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -110,8 +114,33 @@
       </div>
     </div><!--=== модальное окно редактирования данных - конец ===-->
 
+    <!--=== модальное окно подтверждения удалени карты - начало ===-->
+    <!--=== popup_opened ===-->
+    <div class="popup popup_delete-card">
+      <div class="popup__container popup__container_delete">
+        <button type="button" class="popup__btn-close"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button class="popup__btn-save" type="submit">Да</button>
+      </div>
+    </div><!--=== модальное окно редактирования данных - конец ===-->
+
+    <!--=== модальное окно смены аватара - начало ===-->
+    <!--=== popup_opened ===-->
+    <div class="popup popup_type_avatar">
+      <div class="popup__container">
+        <button type="button" class="popup__btn-close"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form name="form-place" class="popup__form popup__form_type_avatar" novalidate>
+          <section class="popup__form-section">
+            <input class="popup__input-text" type="url" name="popup-avatar-link" id="popup-avatar-link" value="" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-text-error" id="popup-place-link-error"></span>
+          </section>
+          <button class="popup__btn-save" type="submit" disabled >Сохранить</button>
+        </form>
+      </div>
+    </div><!--=== модальное окно редактирования данных - конец ===-->
+
   </div><!--=== page - конец ===-->
-  <!-- <script async src="//pixel-perfect.org/service/script.js?guid=a59dd8400a96022d6e27d44f04b897ad"></script> -->
 
   <template id="place-template">
     <li class="elements__item">
@@ -119,7 +148,11 @@
       <img class="elements__img" src="" alt="">
       <div class="elements__text-block">
         <p class="elements__title"></p>
-        <button type="button" class="elements__btn-heart"></button>
+        <div class="elements__like-block">
+          <button type="button" class="elements__btn-heart"></button>
+          <p class="elements__like-count">0</p>
+        </div>
+
       </div>
     </li>
   </template>

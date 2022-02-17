@@ -1,17 +1,25 @@
 // ****************************************
 // Работа модальных окон
 
-import {escButton} from '../pages/index';
+import {escButton, loadOldCards} from '../pages/index';
 import {disabledSubmitBtn} from './utils';
+
+
 
 export const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
 
   document.addEventListener('keydown', escBtnListener);
 
-  const popupBlock = popupElement.classList.contains('popup_type_place');
-  if (popupBlock){
+  const popupPlaceBlock = popupElement.classList.contains('popup_type_place');
+  const popupUserBlock = popupElement.classList.contains('popup__form_type_profile');
+
+  if (popupPlaceBlock){
     disabledSubmitBtn('popup__btn-save_inactive');
+  } else if (popupUserBlock) {
+
+    loadOldCards();
+
   }
   // document.addEventListener('click', overlayClick);
 }

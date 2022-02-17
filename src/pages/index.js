@@ -1,28 +1,29 @@
 import './index.css';
-
-import {initialCards} from '../components/initial-сards';
+import { apiConfig } from '../components/constants.js';
+// import {initialCards} from '../components/initial-сards';
 import {enableValidation} from '../components/validate';
+import {disabledSubmitBtn} from '../components/utils';
 import {openPopup, closePopup, overlayClick} from '../components/modal';
-import {handleCardFormSubmit, addCard}  from '../components/card';
-
-
-// ******************************************
-// Добавил изображения таким образом (не знаю на сколько правильно )) )
+import {handleCardFormSubmit, addCard, popupDeleteCard, popupDeleteCardCloseBtn}  from '../components/card';
+import {getUserInfo, getCards, sendChangeProfile, sendChangeAvatar} from './api';
 
 import headerLogo from '../images/logo.svg';
-import profileImage from '../images/profile__image.jpg';
+// import profileImage from '../images/profile__image.jpg';
 
 const headerLogoBlock = document.querySelector('.header__logo');
 const profileImageBlock = document.querySelector('.profile__image');
+const profileUserName = document.querySelector('.profile__name');
+const profileUserSkills = document.querySelector('.profile__skills');
+export let profileUserId = '';
 
 const popupUserBtnEdit = document.querySelector('.profile__btn-edit');
 const popupPlaceBtnAdd = document.querySelector('.profile__btn-add');
+const popupAvatarEdit = document.querySelector('.profile__image-edit');
 
 export const popupImage = document.querySelector('.popup_type_image');
 export const fieldBigImage = popupImage.querySelector('.popup__image-big');
 export const fieldImgTitle = popupImage.querySelector('.popup__image-title');
 const popupImageBtnClose = popupImage.querySelector('.popup__btn-close');
-
 
 const popupUser = document.querySelector('.popup_type_profile');
 const popupUserBtnClose = popupUser.querySelector('.popup__btn-close');
@@ -37,21 +38,27 @@ const popupProfileForm = popupUser.querySelector('.popup__form_type_profile');
 const nameInput = popupProfileForm.querySelector('#popup-profile-name');
 const jobInput = popupProfileForm.querySelector('#popup-profile-skills');
 
+export const popupAvatar = document.querySelector('.popup_type_avatar');
+const popupAvatarBtnClose = popupAvatar.querySelector('.popup__btn-close');
+const avatarUrlInput = popupAvatar.querySelector('#popup-avatar-link');
+export const popupAvatarBtnSave = popupAvatar.querySelector('.popup__btn-save');
+
 export const escButton = '27';
 
 const nameField = document.querySelector('.profile__name');
 const jobField = document.querySelector('.profile__skills');
 
-// ******************************************
-// Подстановка изображений
-
-headerLogoBlock.src = headerLogo;
-profileImageBlock.src = profileImage
 
 // ******************************************
 // Открытие и закрытие модального окна
 
+popupAvatarEdit.addEventListener('click', () => {
+  openPopup(popupAvatar);
+});
 
+popupAvatarBtnClose.addEventListener('click', () => {
+  closePopup(popupAvatar);
+});
 
 popupUserBtnEdit.addEventListener('click', () => {
   openPopup(popupUser);
@@ -73,19 +80,86 @@ popupImageBtnClose.addEventListener('click' , () => {
   closePopup(popupImage);
 })
 
+popupDeleteCardCloseBtn.addEventListener('click', () => {
+  closePopup(popupDeleteCard);
+})
 
+
+// ******************************************
+// Получение данных о пользователе с сервера
+
+const loadUserInfo = () => {
+  getUserInfo(apiConfig)
+    .then( (info) => {
+      profileImageBlock.src = info.avatar;
+      profileUserName.textContent = info.name;
+      profileUserSkills.textContent = info.about;
+      profileUserId = info._id;
+
+      nameInput.value = info.name;
+      jobInput.value = info.about;
+
+      console.log('Загрузка информации о пользователе - выполнена');
+      console.log(info);
+
+    } )
+    .catch( (error) => {
+      console.log('Ошибка загрузки информации о пользователе');
+      console.log(error);
+    })
+}
+
+headerLogoBlock.src = headerLogo;
+
+// ******************************************
+// Обрботка формы изменения аватара
+
+const handleFormAvatarSubmit = (evt) => {
+  evt.preventDefault();
+
+  const newAvatar = avatarUrlInput.value;
+
+  sendChangeAvatar(newAvatar)
+    .then( (avatar) => {
+      console.log(avatar);
+      profileImageBlock.src = avatar.avatar;
+    })
+    .catch( (error) => {
+      console.log('Ошибка изменения аватара');
+      console.log(error);
+    })
+    .finally( () => {
+      avatarUrlInput.value = '';
+      closePopup(popupAvatar);
+    })
+}
+
+popupAvatar.addEventListener('submit', handleFormAvatarSubmit);
 
 // ******************************************
 // Обрботка формы пользователя
 
-
 const handleFormProfileSubmit = (evt) => {
   evt.preventDefault();
 
-  console.log('Форма принята');
-  nameField.textContent = nameInput.value;
-  jobField.textContent = jobInput.value;
+  //console.log('Форма принята');
+  const newName = nameInput.value;
+  const newSkills = jobInput.value;
+  // nameField.textContent = newName;
+  // jobField.textContent = newSkills;
 
+  sendChangeProfile(newName, newSkills)
+    .then( (newProfie) => {
+      nameField.textContent = newName;
+      jobField.textContent = newSkills;
+      console.log(`Загрузка Имя: ${newName} Профиль ${newSkills} `);
+      console.log('Загрузка изменений имени - выполнена');
+      console.log(newProfie);
+    })
+    .catch( (error) => {
+      console.log('Ошибка загрузки изменений ');
+      console.log(error);
+    } )
   closePopup(popupUser);
 }
 
@@ -97,11 +171,21 @@ popupProfileForm.addEventListener('submit', handleFormProfileSubmit);
 popupPlaceForm.addEventListener('submit', handleCardFormSubmit );
 
 // ******************************************
-// Вызов списка мест
+// Загрузка карточек
 
-initialCards.forEach( item => {
-  addCard(item.name, item.link);
-})
+export const loadOldCards = () => {
+  getCards()
+    .then( (data) => {
+      //console.log('карты загружены и отправлены на отрисовку');
+      //console.log(data);
+      data.forEach( item => {
+        addCard(item);
+      })
+    })
+    .catch( (error) => {
+      console.log('Ошибка при отрисовке карт', error);
+    } )
+}
 
 // ******************************************
 // включение валидации
@@ -117,7 +201,17 @@ enableValidation({
 });
 
 // ******************************************
-
+// Установка прослушки на клик по оверлейю
 overlayClick(popupPlace);
 overlayClick(popupUser);
 overlayClick(popupImage);
+overlayClick(popupDeleteCard);
+overlayClick(popupAvatar);
+
+// ******************************************
+// Вызов информации о пользователе
+loadUserInfo();
+
+// ******************************************
+// Вызов готовых карточек
+loadOldCards();
