@@ -107,6 +107,7 @@ const loadUserInfo = () => {
       console.log('Ошибка загрузки информации о пользователе');
       console.log(error);
     })
+    .finally( () => {})
 }
 
 headerLogoBlock.src = headerLogo;
@@ -123,15 +124,14 @@ const handleFormAvatarSubmit = (evt) => {
     .then( (avatar) => {
       console.log(avatar);
       profileImageBlock.src = avatar.avatar;
+      avatarUrlInput.value = '';
+      closePopup(popupAvatar);
     })
     .catch( (error) => {
       console.log('Ошибка изменения аватара');
       console.log(error);
     })
-    .finally( () => {
-      avatarUrlInput.value = '';
-      closePopup(popupAvatar);
-    })
+    .finally( () => {})
 }
 
 popupAvatar.addEventListener('submit', handleFormAvatarSubmit);
@@ -155,12 +155,13 @@ const handleFormProfileSubmit = (evt) => {
       console.log(`Загрузка Имя: ${newName} Профиль ${newSkills} `);
       console.log('Загрузка изменений имени - выполнена');
       console.log(newProfie);
+      closePopup(popupUser);
     })
     .catch( (error) => {
       console.log('Ошибка загрузки изменений ');
       console.log(error);
-    } )
-  closePopup(popupUser);
+    })
+    .finally( () => {})
 }
 
 popupProfileForm.addEventListener('submit', handleFormProfileSubmit);
@@ -184,7 +185,8 @@ export const loadOldCards = () => {
     })
     .catch( (error) => {
       console.log('Ошибка при отрисовке карт', error);
-    } )
+    })
+    .finally( () => {})
 }
 
 // ******************************************
