@@ -57,11 +57,12 @@ export const deleteMyCard = (cardId) => {
     method: 'DELETE',
     headers: apiConfig.headers
   })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка - ${responce.status}`);
-      }
-    })
+    // .then(response => {
+    //   if (!response.ok) {
+    //     return Promise.reject(`Ошибка - ${responce.status}`);
+    //   }
+    // })
+    .then(checkResponse);
 }
 
 // Постановка лайка
@@ -79,11 +80,12 @@ export const deleteLike = (likesCardId) => {
     method: 'DELETE',
     headers: apiConfig.headers
   })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка - ${responce.status}`);
-      }
-    })
+    // .then(response => {
+    //   if (!response.ok) {
+    //     return Promise.reject(`Ошибка - ${responce.status}`);
+    //   }
+    // })
+    .then(checkResponse);
 }
 
 // Получение кол-ва лайков на карте

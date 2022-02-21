@@ -4,8 +4,6 @@
 import {escButton, loadOldCards} from '../pages/index';
 import {disabledSubmitBtn} from './utils';
 
-
-
 export const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
 
@@ -17,9 +15,7 @@ export const openPopup = (popupElement) => {
   if (popupPlaceBlock){
     disabledSubmitBtn('popup__btn-save_inactive');
   } else if (popupUserBlock) {
-
     loadOldCards();
-
   }
   // document.addEventListener('click', overlayClick);
 }
