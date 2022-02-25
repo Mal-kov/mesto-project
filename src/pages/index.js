@@ -1,10 +1,8 @@
 import './index.css';
-import { apiConfig } from '../components/constants.js';
-// import {initialCards} from '../components/initial-сards';
 import {enableValidation} from '../components/validate';
 import {disabledSubmitBtn} from '../components/utils';
-import {openPopup, closePopup, overlayClick} from '../components/modal';
-import {handleCardFormSubmit, addCard, popupDeleteCard, popupDeleteCardCloseBtn}  from '../components/card';
+import {openPopup, closePopup} from '../components/modal';
+import {handleCardFormSubmit, addCard}  from '../components/card';
 import {getUserInfo, getCards, sendChangeProfile, sendChangeAvatar} from './api';
 
 import headerLogo from '../images/logo.svg';
@@ -23,13 +21,10 @@ const popupAvatarEdit = document.querySelector('.profile__image-edit');
 export const popupImage = document.querySelector('.popup_type_image');
 export const fieldBigImage = popupImage.querySelector('.popup__image-big');
 export const fieldImgTitle = popupImage.querySelector('.popup__image-title');
-const popupImageBtnClose = popupImage.querySelector('.popup__btn-close');
 
 const popupUser = document.querySelector('.popup_type_profile');
-const popupUserBtnClose = popupUser.querySelector('.popup__btn-close');
 
 export const popupPlace = document.querySelector('.popup_type_place');
-const popupPlaceBtnClose = popupPlace.querySelector('.popup__btn-close');
 export const popupPlaceBtnSave = popupPlace.querySelector('.popup__btn-save');
 
 const popupPlaceForm = popupPlace.querySelector('.popup__form_type_place');
@@ -39,7 +34,6 @@ const nameInput = popupProfileForm.querySelector('#popup-profile-name');
 const jobInput = popupProfileForm.querySelector('#popup-profile-skills');
 
 export const popupAvatar = document.querySelector('.popup_type_avatar');
-const popupAvatarBtnClose = popupAvatar.querySelector('.popup__btn-close');
 const avatarUrlInput = popupAvatar.querySelector('#popup-avatar-link');
 export const popupAvatarBtnSave = popupAvatar.querySelector('.popup__btn-save');
 
@@ -53,43 +47,41 @@ const jobField = document.querySelector('.profile__skills');
 // Открытие и закрытие модального окна
 
 popupAvatarEdit.addEventListener('click', () => {
+  disabledSubmitBtn('popup__btn-save_inactive');
   openPopup(popupAvatar);
-});
-
-popupAvatarBtnClose.addEventListener('click', () => {
-  closePopup(popupAvatar);
 });
 
 popupUserBtnEdit.addEventListener('click', () => {
   openPopup(popupUser);
-});
-
-popupUserBtnClose.addEventListener('click', () => {
-  closePopup(popupUser);
+  loadOldCards();
 });
 
 popupPlaceBtnAdd.addEventListener('click', () => {
+  disabledSubmitBtn('popup__btn-save_inactive');
   openPopup(popupPlace);
 });
 
-popupPlaceBtnClose.addEventListener('click', () => {
-  closePopup(popupPlace);
-});
 
-popupImageBtnClose.addEventListener('click' , () => {
-  closePopup(popupImage);
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach( (popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      console.log('Есть клик оверлея');
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains('popup__btn-close')) {
+      closePopup(popup)
+      console.log('Есть клик на кнопке закрытия окна');
+    }
+  })
 })
-
-popupDeleteCardCloseBtn.addEventListener('click', () => {
-  closePopup(popupDeleteCard);
-})
-
 
 // ******************************************
 // Получение данных о пользователе с сервера
 
 const loadUserInfo = () => {
-  getUserInfo(apiConfig)
+  getUserInfo()
     .then( (info) => {
       profileImageBlock.src = info.avatar;
       profileUserName.textContent = info.name;
@@ -145,8 +137,6 @@ const handleFormProfileSubmit = (evt) => {
   //console.log('Форма принята');
   const newName = nameInput.value;
   const newSkills = jobInput.value;
-  // nameField.textContent = newName;
-  // jobField.textContent = newSkills;
 
   sendChangeProfile(newName, newSkills)
     .then( (newProfie) => {
@@ -204,16 +194,25 @@ enableValidation({
 
 // ******************************************
 // Установка прослушки на клик по оверлейю
-overlayClick(popupPlace);
-overlayClick(popupUser);
-overlayClick(popupImage);
-overlayClick(popupDeleteCard);
-overlayClick(popupAvatar);
+// overlayClick(popupPlace);
+// overlayClick(popupUser);
+// overlayClick(popupImage);
+// overlayClick(popupDeleteCard);
+// overlayClick(popupAvatar);
 
 // ******************************************
 // Вызов информации о пользователе
-loadUserInfo();
+// loadUserInfo();
 
 // ******************************************
 // Вызов готовых карточек
-loadOldCards();
+// loadOldCards();
+
+Promise.all([getUserInfo(), getCards()])
+  .then(([userData, cards]) => {
+      loadUserInfo(userData);
+      loadOldCards(cards);
+  })
+  .catch( (error) => {
+    console.log('Ошибка при отработке общего промиса данные + карты', error);
+  });
