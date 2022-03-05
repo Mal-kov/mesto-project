@@ -169,7 +169,7 @@ export const loadOldCards = () => {
     .then( (data) => {
       //console.log('карты загружены и отправлены на отрисовку');
       //console.log(data);
-      data.forEach( item => {
+      data.reverse().forEach( item => {
         addCard(item);
       })
     })

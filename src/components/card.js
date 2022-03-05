@@ -12,6 +12,8 @@ const plaseLink = document.querySelector('#popup-place-link');
 export const popupDeleteCard = document.querySelector('.popup_delete-card');
 const popupDeleteCardSubmit = popupDeleteCard.querySelector('.popup__btn-save');
 
+let temp;
+
 const renderPopupImage = (placeName, plaseLink) => {
   openPopup(popupImage);
 
@@ -56,13 +58,9 @@ const createCard = (placeData) => {
   const placeElement = placeTemplate.querySelector('.elements__item').cloneNode( true );
 
   if (placeData.owner._id === profileUserId) {
-    placeElement.querySelector('.elements__btn-trash').addEventListener('click', (evt) => {
-      openPopup(popupDeleteCard);
-      popupDeleteCardSubmit.addEventListener('click', (evt) => {
-        deleteCard(placeData, placeElement);
-        console.log(evt);
-      } );
-    } );
+
+    actionToDeleteCard(placeData, placeElement, popupDeleteCardSubmit);
+
   } else {
     placeElement.querySelector('.elements__btn-trash').remove();
   }
@@ -89,6 +87,9 @@ const createCard = (placeData) => {
           evt.target.classList.toggle('elements__btn-heart_active');
           placeElement.querySelector('.elements__like-count').textContent = cardId.likes.length;
         } )
+        .catch( error => {
+          console.log('Ошибка постановки лайка', error);
+        })
     } else {
       console.log('Снял лайк');
       deleteLike(placeData._id)
@@ -96,29 +97,40 @@ const createCard = (placeData) => {
           evt.target.classList.toggle('elements__btn-heart_active');
           placeElement.querySelector('.elements__like-count').textContent = cardId.likes.length;
         })
+        .catch( error => {
+          console.log('Ошибка удаления лайка', error);
+        })
     }
   });
   return placeElement;
 }
 
-const deleteCard = (placeData, placeElement) => {
-  console.log(placeData._id);
-  console.log('есть клик на кнопке подтверждения удаления карты');
 
-   deleteMyCard(placeData._id)
-      .then( () => {
-        placeElement.remove();
-        console.log('Карточка успешно удалена');
-        closePopup(popupDeleteCard);
-        console.log(placeData._id);
-        // placeData = {};
-      })
-     .catch( error => {
-       console.log('Ошибка удаления карты');
-       console.log(error);
+const actionToDeleteCard = (placeData, placeElement, popupDeleteCardSubmit) => {
+
+  placeElement.querySelector('.elements__btn-trash').addEventListener('click', () => {
+    openPopup(popupDeleteCard);
+    popupDeleteCardSubmit.addEventListener('click', deleteChosenCard);
+  } );
+
+  const deleteChosenCard = () => {
+    // console.log(evt);
+    console.log('есть клик на кнопке подтверждения удаления карты');
+    deleteMyCard(placeData._id)
+     .then( () => {
+       placeElement.remove();
+       console.log('Карточка успешно удалена');
+       closePopup(popupDeleteCard);
+       console.log(placeData._id);
+       popupDeleteCardSubmit.removeEventListener('click', deleteChosenCard);
      })
-     .finally( () => {});
-};
+    .catch( error => {
+      console.log('Ошибка удаления карты');
+      console.log(error);
+    })
+  }
+}
+
 
 
 // const deleteCard = (path) => {
