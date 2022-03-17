@@ -75,3 +75,90 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+
+
+
+
+(cardElement, cardId) => { // 3 параметр (функция)
+  const handleRemoveCardSubmit = (evt) => {
+    // промис обращения к серверу на удаление карточки
+    // и в случае успеха удаление её из разметки
+    // закрытие модального окна
+    // и удаление ненужного листенера
+    removeCardModalWindow.removeEventListener('submit', handleRemoveCardSubmit);
+  };
+
+  removeCardModalWindow.addEventListener('submit', handleRemoveCardSubmit);
+  openModalWindow(removeCardModalWindow);
+}
+
+
+
+//Попробую расписать, что нужно сделать внутри неё:
+
+(cardElement, cardId) => { // эта функция-третий аргумент будет вызываться при клике на крестик
+  const handleRemoveCardSubmit = (evt) => { // внутри создаём вложенную функцию-обработчик
+    evt.preventDefault();
+
+    removeCard(cardId) // отправляемся на сервер за подтверждением удаления
+      .then(() => {
+        handleDeleteCard(cardElement); // удаление карточки из размтетки должно происходить только в случае успешного запроса
+        closeModalWindow(removeCardModalWindow);  // закрытие модальных окон должно происходить только в случае успешного запроса
+      })
+      .catch(err => console.log(`При удалении карточки: ${err}`));
+
+    // а также внутри этого самого обработчика выполняем удаление его самого же
+    // !!! вот это важный и нужный момент
+    removeCardModalWindow.removeEventListener('submit', handleRemoveCardSubmit);
+  };
+  // устанавливаем этот обработчик
+  removeCardModalWindow.addEventListener('submit', handleRemoveCardSubmit);
+  openModalWindow(removeCardModalWindow); // и открываем модалку
+}
+
+
+
+
+// const deleteCard = (path) => {
+//   const deleteButton = path.closest( '.elements__item' );
+//   deleteButton.remove();
+// }
+
+
+
+// Получится, если сделать примерно так
+// index.js
+const createCard = (cardData, container) => {
+  const htmlCardElem = getCardElement(
+  { // 1 параметр
+    ...cardData,
+    currentUserId: userId,
+  },
+  (cardElement, cardId, isLiked) => { // 2 параметр (функция)
+    // здесь промис обращения к серверу на простановку лайка
+    // и в случае успеха простановка лайка в разметке
+  },
+  (cardElement, cardId) => { // 3 параметр (функция)
+    const handleRemoveCardSubmit = (evt) => {
+      // промис обращения к серверу на удаление карточки
+      // и в случае успеха удаление её из разметки
+      // закрытие модального окна
+      // и удаление ненужного листенера
+      removeCardModalWindow.removeEventListener('submit', handleRemoveCardSubmit);
+    };
+
+    removeCardModalWindow.addEventListener('submit', handleRemoveCardSubmit);
+    openModalWindow(removeCardModalWindow);
+  }
+);
+
+container.prepend(htmlCardElem);
+};
+
+// card.js
+export const getCardElement = (data, handleLikeClick, handleDeleteClick) => {
+const cardElement = getFromTemplate();
+// создание HTML-карточки в памяти и навешивание листенеров
+return cardElement;
+};

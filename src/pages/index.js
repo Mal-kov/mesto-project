@@ -134,7 +134,6 @@ popupAvatar.addEventListener('submit', handleFormAvatarSubmit);
 const handleFormProfileSubmit = (evt) => {
   evt.preventDefault();
 
-  //console.log('Форма принята');
   const newName = nameInput.value;
   const newSkills = jobInput.value;
 

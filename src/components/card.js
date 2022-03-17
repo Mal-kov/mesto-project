@@ -1,18 +1,13 @@
 // ***************************************************************************************
 // Создание / удаление карточек
 
-import {openPopup, closePopup} from './modal';
+import {openPopup, closePopup, openPopupDeleteCard} from './modal';
 import {popupPlace, popupImage, fieldBigImage, fieldImgTitle, profileUserId} from '../pages/index'
-import {sendNewCard, deleteMyCard, putLike, deleteLike, getLikes} from '../pages/api';
+import {sendNewCard, deleteMyCard, putLike, deleteLike} from '../pages/api';
 
 const cardContainer = document.querySelector('.elements__list');
 const placeName = document.querySelector('#popup-place-name');
 const plaseLink = document.querySelector('#popup-place-link');
-
-export const popupDeleteCard = document.querySelector('.popup_delete-card');
-const popupDeleteCardSubmit = popupDeleteCard.querySelector('.popup__btn-save');
-
-let temp;
 
 const renderPopupImage = (placeName, plaseLink) => {
   openPopup(popupImage);
@@ -40,9 +35,6 @@ export const handleCardFormSubmit = (evt) => {
       console.log('Ошибка создания новой карточки');
       console.log(error);
     })
-    .finally( () => {
-
-    })
 }
 
 export const addCard = (placeData) => {
@@ -52,15 +44,11 @@ export const addCard = (placeData) => {
 
 const createCard = (placeData) => {
   console.log(placeData);
-  let countOfClicks = 0;
-
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.elements__item').cloneNode( true );
 
   if (placeData.owner._id === profileUserId) {
-
-    actionToDeleteCard(placeData, placeElement, popupDeleteCardSubmit);
-
+    actionToDeleteCard(placeData, placeElement);
   } else {
     placeElement.querySelector('.elements__btn-trash').remove();
   }
@@ -76,12 +64,38 @@ const createCard = (placeData) => {
     renderPopupImage(evt.target.alt, evt.target.currentSrc);
   })
 
+  handleForLikeDislike(placeData, placeElement);
+
+  return placeElement;
+}
+
+
+const actionToDeleteCard = (placeData, placeElement) => {
+  placeElement.setAttribute('data-id', placeData._id);
+  placeElement.querySelector('.elements__btn-trash').addEventListener('click', () => {
+
+    console.log('есть клик на кнопке подтверждения удаления карты');
+      deleteMyCard(placeData._id)
+      .then( () => {
+        placeElement.remove();
+        console.log('Карточка успешно удалена');
+        console.log(placeData._id);
+      })
+      .catch( error => {
+        console.log('Ошибка удаления карты');
+        console.log(error);
+      })
+  } );
+}
+
+const handleForLikeDislike = (placeData, placeElement) => {
+  let countOfClicks = 0;
+
   placeElement.querySelector('.elements__btn-heart').addEventListener('click', (evt) => {
     countOfClicks ++;
 
     if (countOfClicks % 2) {
       console.log('Поставил лайк');
-      // console.log(placeData._id);
       putLike(placeData._id)
         .then( cardId => {
           evt.target.classList.toggle('elements__btn-heart_active');
@@ -102,39 +116,6 @@ const createCard = (placeData) => {
         })
     }
   });
-  return placeElement;
 }
 
-
-const actionToDeleteCard = (placeData, placeElement, popupDeleteCardSubmit) => {
-
-  placeElement.querySelector('.elements__btn-trash').addEventListener('click', () => {
-    openPopup(popupDeleteCard);
-    popupDeleteCardSubmit.addEventListener('click', deleteChosenCard);
-  } );
-
-  const deleteChosenCard = () => {
-    // console.log(evt);
-    console.log('есть клик на кнопке подтверждения удаления карты');
-    deleteMyCard(placeData._id)
-     .then( () => {
-       placeElement.remove();
-       console.log('Карточка успешно удалена');
-       closePopup(popupDeleteCard);
-       console.log(placeData._id);
-       popupDeleteCardSubmit.removeEventListener('click', deleteChosenCard);
-     })
-    .catch( error => {
-      console.log('Ошибка удаления карты');
-      console.log(error);
-    })
-  }
-}
-
-
-
-// const deleteCard = (path) => {
-//   const deleteButton = path.closest( '.elements__item' );
-//   deleteButton.remove();
-// }
 
